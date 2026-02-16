@@ -6,6 +6,7 @@ on:
       - main
       - 'feature/**'
       - 'bugfix/**' 
+      - 'blue-green'
   workflow_dispatch:
 
 env:  
@@ -14,7 +15,7 @@ env:
   OCTOPUS_FEATURE_BRANCH_ENVIRONMENT: Development
   OCTOPUS_RELEASE_CHANNEL: Release
   OCTOPUS_RELEASE_ENVIRONMENT: Staging  
-  OCTOPUS_SPACE: Default
+  OCTOPUS_SPACE: Blue-Green
   OCTOPUS_API_KEY: ${{ secrets.OCTOPUSSERVERAPIKEY }}
   OCTOPUS_URL: ${{ secrets.OCTOPUSSERVERURL }}
 
@@ -133,18 +134,18 @@ jobs:
             Trident.Web
           version: ${{ steps.ReleaseNum.outputs.APP_VERSION }}
             
-      - name: create release
-        uses: OctopusDeploy/create-release-action@v3
-        with:
-          project: ${{ env.OCTOPUS_PROJECT_NAME }}
-          channel: ${{ steps.ReleaseNum.outputs.OCTOPUS_CHANNEL }}
-          release_number: ${{ steps.ReleaseNum.outputs.APP_VERSION }}
-          package_version: ${{ steps.ReleaseNum.outputs.APP_VERSION }}
+      # - name: create release
+      #   uses: OctopusDeploy/create-release-action@v3
+      #   with:
+      #     project: ${{ env.OCTOPUS_PROJECT_NAME }}
+      #     channel: ${{ steps.ReleaseNum.outputs.OCTOPUS_CHANNEL }}
+      #     release_number: ${{ steps.ReleaseNum.outputs.APP_VERSION }}
+      #     package_version: ${{ steps.ReleaseNum.outputs.APP_VERSION }}
       
-      - name: deploy release
-        uses: OctopusDeploy/deploy-release-action@v3
-        id: "deploy_release"
-        with:
-          project: ${{ env.OCTOPUS_PROJECT_NAME }}
-          release_number: ${{ steps.ReleaseNum.outputs.APP_VERSION }}
-          environments: ${{ steps.ReleaseNum.outputs.OCTOPUS_ENVIRONMENT }}
+      # - name: deploy release
+      #   uses: OctopusDeploy/deploy-release-action@v3
+      #   id: "deploy_release"
+      #   with:
+      #     project: ${{ env.OCTOPUS_PROJECT_NAME }}
+      #     release_number: ${{ steps.ReleaseNum.outputs.APP_VERSION }}
+      #     environments: ${{ steps.ReleaseNum.outputs.OCTOPUS_ENVIRONMENT }}
