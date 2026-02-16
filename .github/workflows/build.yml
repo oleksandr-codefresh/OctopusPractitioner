@@ -9,6 +9,7 @@ on:
       - 'blue-green'
   workflow_dispatch:
 
+
 env:  
   OCTOPUS_PROJECT_NAME: Trident
   OCTOPUS_FEATURE_BRANCH_CHANNEL: Default
