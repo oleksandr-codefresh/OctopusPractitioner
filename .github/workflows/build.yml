@@ -6,7 +6,6 @@ on:
       - main
       - 'feature/**'
       - 'bugfix/**'
-
   workflow_dispatch:
 
 env:  
